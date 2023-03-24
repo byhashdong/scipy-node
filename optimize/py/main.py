@@ -1,14 +1,16 @@
 try:
     from scipy import optimize as o
 except:
-    print 'Unable to find scipy library. Make sure you have downloaded scipy. See http://www.scipy.org/install.html'
+    print('Unable to find scipy library. Make sure you have downloaded scipy. See http://www.scipy.org/install.html')
 
 try:
     import numpy as np
 except:
-    print 'Unable to find numpy library. Make sure you have downloaded numpy. See http://www.numpy.org/'
+    print('Unable to find numpy library. Make sure you have downloaded numpy. See http://www.numpy.org/')
 
 def local_minimize(func, options):
+#     print(options)
+
     bracket = options['bracket']
     bounds  = options['bounds']
     method  = options['method']
@@ -78,9 +80,9 @@ def calc_derivative_values(func, options):
         return o.approx_fprime(point, func, epsilon).tolist()
     except Exception as e:
         e = str(e)
-        if e is 'a float is required':
+        if e == 'a float is required':
             return 'argument passed to function that you want to calculate the derivate for must take an array. Even for a univariate function, it expects an array of length 1'
-        if e is "object of type 'int' has no len()":
+        if e == "object of type 'int' has no len()":
             return 'the point at which the derivative is calculated must be an array. Even for a univariate function, point expects an array of length 1'
         return str(e)
 

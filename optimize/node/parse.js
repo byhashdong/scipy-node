@@ -4,12 +4,13 @@ Parser.extractFromFunction = function (func, multipleParams) {
   // if function given is a function,
   // extract the argument name, extract the return value,
   // replace the argument name with 'x'
-  // return the return value as a string, with x as the independent variable
+  let regex;
+// return the return value as a string, with x as the independent variable
   func = func.toString();
-  var args;
+  let args;
   if (!multipleParams) {
-    var arg = func.match(/^function\s*[^\(]*\(\s*([^\)\,]*)[\,\)]/m)[1];
-    var regex = new RegExp('\\b' + arg.trim() + '\\b', 'g')
+    const arg = func.match(/^function\s*[^\(]*\(\s*([^\)\,]*)[\,\)]/m)[1];
+    regex = new RegExp('\\b' + arg.trim() + '\\b', 'g');
     func = func.replace(regex, 'x');
   } else {
     // args are going to be f(x, a, b, c...) - x is independent variable, a, b... are parameters
@@ -17,7 +18,7 @@ Parser.extractFromFunction = function (func, multipleParams) {
     args = args.split(',');
     var ch = 'a';
     for (var i = 0; i < args.length; i++) {
-      var regex = new RegExp('\\b' + args[i].trim() + '\\b', 'g');
+      regex = new RegExp('\\b' + args[i].trim() + '\\b', 'g');
       if (i === 0) {
         func = func.replace(regex, 'x');
       } else {
@@ -62,7 +63,7 @@ Parser.extractFromString = function (func, newVarName, multipleParams) {
 }
 
 Parser.cleanFunc = function (func, newVarName, multipleParams){
-  var f;
+  let f;
   if (typeof func === 'function') {
     f = Parser.extractFromFunction(func, multipleParams);
   } else if (typeof func === 'string') {
@@ -71,7 +72,7 @@ Parser.cleanFunc = function (func, newVarName, multipleParams){
     throw 'function to be optimized needs to be a function or a string expression';
   }
   func = f.func;
-  var numArgs = f.numArgs;
+  const numArgs = f.numArgs;
 
   func = func.replace(/Math./gi,'');
   func = func.replace(/LN2/gi, 'ln(2)');

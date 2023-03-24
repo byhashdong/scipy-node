@@ -2,7 +2,7 @@ import main as m
 try:
     from sympy.utilities.lambdify import lambdify
 except:
-    print 'Unable to find sympy. Make sure you have downloaded sympy. See http://sympy.org/en/download.html'
+    print('Unable to find sympy. Make sure you have downloaded sympy. See http://sympy.org/en/download.html')
 
 import json
 import argparse
@@ -42,7 +42,7 @@ elif operation == 'nnls':
     results = m.nnls(A, b)
 
 try:
-    print json.JSONEncoder().encode(results)
+    print(json.JSONEncoder().encode(results))
 except Exception as e:
-    print e
-    print results
+    print(e)
+    print(results)

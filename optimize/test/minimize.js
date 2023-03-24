@@ -1,22 +1,22 @@
 var opt = require('../index');
 var should = require('should');
 
-describe('minimize', function(){
+describe('minimize', function () {
 
-  var f = function(a) {
-    return Math.pow(a, 4) + Math.pow(a, 3) - 13 * Math.pow(x, 2) - x + 12;
+  const f = function (a) {
+    return Math.pow(a, 4) + Math.pow(a, 3) - 13 * Math.pow(a, 2) - a + 12;
   };
 
-  var g = 'y**4 + y**3 - 13*y**2 - y + 12';
+  const g = 'y**4 + y**3 - 13*y**2 - y + 12';
 
-  describe('localMinimize', function(){
-    var resultF, resultG;
+  describe('localMinimize', function () {
+    let resultF, resultG;
 
-    before(function (done){
-      var i = 0;
+    before(function (done) {
+      let i = 0;
       opt.localMinimize(f, {
         bounds: [0, 10]
-      }, function (results){
+      }, function (results) {
         resultF = results;
         if (++i === 2) {
           done();
@@ -25,7 +25,7 @@ describe('minimize', function(){
       opt.localMinimize(g, {
         bounds: [0, 10],
         variable: 'y'
-      }, function (results){
+      }, function (results) {
         resultG = results;
         if (++i === 2) {
           done();
@@ -33,25 +33,25 @@ describe('minimize', function(){
       });
     });
 
-    it('correctly finds a local minima of a function', function() {
+    it('correctly finds a local minima of a function', function () {
       Math.round(resultF.x * 100).should.equal(222);
       Math.round(resultF.fun * 100).should.equal(-1906);
     });
 
-    it('correctly finds minimum for string or function func', function() {
+    it('correctly finds minimum for string or function func', function () {
       Math.round(resultF.x * 10000).should.equal(Math.round(resultG.x * 10000));
       Math.round(resultF.fun * 10000).should.equal(Math.round(resultG.fun * 10000));
     })
 
   });
 
-  describe('globalMinimize', function(){
+  describe('globalMinimize', function () {
     var resultF;
     var resultG;
 
-    before(function (done){
+    before(function (done) {
       var i = 0;
-      opt.globalMinimize(f, function (results){
+      opt.globalMinimize(f, function (results) {
         resultF = results;
         if (++i === 2) {
           done();
@@ -59,7 +59,7 @@ describe('minimize', function(){
       });
       opt.globalMinimize(g, {
         variable: 'y'
-      }, function (results){
+      }, function (results) {
         resultG = results;
         if (++i === 2) {
           done();
@@ -67,18 +67,18 @@ describe('minimize', function(){
       });
     });
 
-    it('correctly finds the global minima of a function', function(){
+    it('correctly finds the global minima of a function', function () {
       Math.round(resultF.x * 100).should.equal(-294);
       Math.round(resultF.fun * 100).should.equal(-4813);
     });
 
-    it('correctly finds the minimum for a string or function func', function() {
+    it('correctly finds the minimum for a string or function func', function () {
       Math.round(resultF.x * 10000).should.equal(Math.round(resultG.x * 10000));
       Math.round(resultF.fun * 10000).should.equal(Math.round(resultG.fun * 10000));
     });
   });
 
-  
+
 });
 
 // // opt.minimize('(x-10)**2', {

@@ -17,7 +17,7 @@ var extendNoOverwrite = function (obj, defaults){
   }
 }
 
-var optionalArgs = function (options, callback) {
+const optionalArgs = function (options, callback) {
   if (typeof options === 'function') {
     callback = options;
     options = undefined;
@@ -32,10 +32,9 @@ var optionalArgs = function (options, callback) {
     options: options
   };
 };
-
-var cleanInputs = module.exports = {
+const cleanInputs = module.exports = {
   cleanMin: function (operation, func, options, callback) {
-    var optional = optionalArgs(options, callback);
+    const optional = optionalArgs(options, callback);
     options  = optional.options;
     callback = optional.callback;
 
@@ -69,7 +68,7 @@ var cleanInputs = module.exports = {
   },
 
   cleanFit: function(func, options, callback, xData, yData) {
-    var optional = optionalArgs(options, callback);
+    const optional = optionalArgs(options, callback);
     options  = optional.options;
     callback = optional.callback;
 
@@ -88,7 +87,7 @@ var cleanInputs = module.exports = {
   },
 
   cleanRoot: function(func, options, callback, lower, upper) {
-    var optional = optionalArgs(options, callback);
+    const optional = optionalArgs(options, callback);
     options  = optional.options;
     callback = optional.callback;
 
@@ -106,7 +105,7 @@ var cleanInputs = module.exports = {
   },
 
   cleanVector: function(func, options, callback, guess) {
-    var optional = optionalArgs(options, callback);
+    const optional = optionalArgs(options, callback);
     options  = optional.options;
     callback = optional.callback;
 
@@ -122,7 +121,7 @@ var cleanInputs = module.exports = {
   },
 
   cleanDerivative: function(func, options, callback, point) {
-    var optional = optionalArgs(options, callback);
+    const optional = optionalArgs(options, callback);
     options  = optional.options;
     callback = optional.callback;
 
@@ -142,4 +141,4 @@ var cleanInputs = module.exports = {
       console.log(results);
     };
   }
-}
+};

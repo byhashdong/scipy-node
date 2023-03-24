@@ -35,5 +35,9 @@
   "homepage": "https://github.com/acjones617/scipy-node/tree/master/optimize",
   "devDependencies": {
     "should": "^4.0.4"
+  },
+  "dependencies": {
+    "@tensorflow/tfjs-node": "^4.2.0",
+    "mocha": "^10.2.0"
   }
 }
